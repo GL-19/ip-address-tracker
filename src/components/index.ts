@@ -1,6 +1,6 @@
 import { Header } from "./Header";
 import { InfosCard } from "./InfosCard";
-import { Input } from "./Input";
+import { SearchIpForm } from "./SearchIpForm";
 import { Map } from "./Map";
 
-export { Header, InfosCard, Input, Map };
+export { Header, InfosCard, SearchIpForm, Map };

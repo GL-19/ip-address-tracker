@@ -1,11 +1,11 @@
 import { InfosCard } from "../InfosCard";
-import { Input } from "../Input";
+import { SearchIpForm } from "../SearchIpForm";
 
 export function Header() {
 	return (
 		<header>
 			<h1>IP Address Tracker</h1>
-			<Input type="text" placeholder="Search for any IP address or domain" />
+			<SearchIpForm onSubmit={async (name) => console.log(name)} />
 			<InfosCard />
 		</header>
 	);

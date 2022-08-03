@@ -32,8 +32,7 @@ export function SearchIpForm({ onSubmit }: SearchIpFormProps) {
 
 const Form = styled.form`
 	width: 100%;
-	max-width: 25rem;
-	margin: 0 auto;
+	max-width: 35rem;
 `;
 
 const Input = styled.input`
@@ -59,7 +58,15 @@ const Button = styled.button`
 	border: none;
 	border-radius: 0 0.75rem 0.75rem 0;
 
+	cursor: pointer;
 	font-size: 18px;
+	font-weight: 700;
 	color: white;
 	background-color: #000000;
+
+	&:hover,
+	&:focus,
+	&:active {
+		filter: brightness(0.5);
+	}
 `;

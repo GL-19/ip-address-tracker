@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     font-family: 'Rubik', sans-serif;
     color: var(--very-dark-gray);
+    background-color: var(--very-dark-gray);
   }
 
   input, button {

@@ -1,9 +1,13 @@
 import { Header, Map } from "./components";
 
 function App() {
+	async function handleIpSearch(ip: string) {
+		console.log(ip);
+	}
+
 	return (
 		<>
-			<Header />
+			<Header onSearch={handleIpSearch} />
 			<Map />
 		</>
 	);

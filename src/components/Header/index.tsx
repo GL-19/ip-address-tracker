@@ -1,23 +1,29 @@
 import styled from "styled-components";
 
-import { InfosCard } from "../InfosCard";
-import { SearchIpForm } from "../SearchIpForm";
+import { IIp } from "../../interfaces/IIp";
+import { IpInfoCard } from "../IpInfoCard";
+import { SearchForm } from "../SearchIpForm";
 
 import headerBackground from "../../assets/images/pattern-bg.png";
 
-export function Header() {
+interface HeaderProps {
+	onSearch: (search: string) => Promise<void>;
+	ip?: IIp;
+}
+
+export function Header({ onSearch, ip }: HeaderProps) {
 	return (
 		<HeaderContainer>
 			<Title>IP Address Tracker</Title>
-			<SearchIpForm onSubmit={async (name) => console.log(name)} />
-			<InfosCardContainer>
-				<InfosCard />
-			</InfosCardContainer>
+			<SearchForm onSubmit={onSearch} placeholder="Search for any IP address or domain" />
+			<IpInfoCardContainer>
+				<IpInfoCard ip={ip} />
+			</IpInfoCardContainer>
 		</HeaderContainer>
 	);
 }
 
-const InfosCardContainer = styled.div`
+const IpInfoCardContainer = styled.div`
 	width: 100%;
 	position: relative;
 	top: 1.5rem;

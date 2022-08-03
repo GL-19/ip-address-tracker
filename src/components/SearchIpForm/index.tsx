@@ -2,16 +2,17 @@ import { FormEvent, useState } from "react";
 import styled from "styled-components";
 
 interface SearchIpFormProps {
-	onSubmit: (ip: string) => Promise<void>;
+	onSubmit: (search: string) => Promise<void>;
+	placeholder?: string;
 }
 
-export function SearchIpForm({ onSubmit }: SearchIpFormProps) {
-	const [ip, setIp] = useState("");
+export function SearchForm({ onSubmit, placeholder }: SearchIpFormProps) {
+	const [search, setSearch] = useState("");
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		try {
-			await onSubmit(ip);
+			await onSubmit(search);
 		} catch (error) {
 			console.log("could no search ip");
 		}
@@ -21,9 +22,9 @@ export function SearchIpForm({ onSubmit }: SearchIpFormProps) {
 		<Form action="submit" onSubmit={handleSubmit}>
 			<Input
 				type="text"
-				placeholder="Search for any IP address or domain"
-				value={ip}
-				onChange={(event) => setIp(event.target.value)}
+				placeholder={placeholder ? placeholder : "Search"}
+				value={search}
+				onChange={(event) => setSearch(event.target.value)}
 			/>
 			<Button type="submit">{">"}</Button>
 		</Form>

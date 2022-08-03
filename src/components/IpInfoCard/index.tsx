@@ -1,24 +1,31 @@
 import styled from "styled-components";
+import { IIp } from "../../interfaces/IIp";
 
-export function InfosCard() {
+interface IpInfoCardProps {
+	ip?: IIp;
+}
+
+export function IpInfoCard({ ip }: IpInfoCardProps) {
 	return (
 		<InfosCardContainer>
 			<InfoContainer>
 				<Identifier>Ip Address</Identifier>
-				<Information>192.212.174.101</Information>
+				<Information>{ip?.address ? ip.address : "192.212.174.101"}</Information>
 			</InfoContainer>
 
 			<InfoContainer>
 				<Identifier>Location</Identifier>
-				<Information>Brooklyn, NY 10001</Information>
+				<Information>{ip?.location ? ip.location : "Brooklyn, NY 10001"}</Information>
 			</InfoContainer>
+
 			<InfoContainer>
 				<Identifier>Timezone</Identifier>
-				<Information>UTC-05:00</Information>
+				<Information>{ip?.timezone ? ip.timezone : "UTC-05:00"}</Information>
 			</InfoContainer>
+
 			<InfoContainer>
-				<Identifier>Usp</Identifier>
-				<Information>SpaceX - Starlink</Information>
+				<Identifier>Isp</Identifier>
+				<Information>{ip?.isp ? ip.isp : "SpaceX - Starlink"}</Information>
 			</InfoContainer>
 		</InfosCardContainer>
 	);

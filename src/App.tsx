@@ -5,9 +5,11 @@ import { getIp } from "./services/api";
 
 function App() {
 	const [ipInfo, setIpInfo] = useState<IIpInfo>({} as IIpInfo);
+	const [displayMap, setDisplayMap] = useState(false);
 
 	const handleIpSearch = useCallback(async (ipAddress?: string) => {
 		try {
+			setDisplayMap(false);
 			const { data } = await getIp(ipAddress);
 
 			console.log(data);
@@ -29,14 +31,18 @@ function App() {
 		}
 	}, []);
 
-	/* 	useEffect(() => {
+	useEffect(() => {
 		handleIpSearch();
-	}, [handleIpSearch]); */
+	}, [handleIpSearch]);
+
+	useEffect(() => {
+		setDisplayMap(true);
+	}, [ipInfo]);
 
 	return (
 		<>
 			<Header onSearch={handleIpSearch} ip={ipInfo} />
-			<Map />
+			{displayMap && <Map position={{ lat: ipInfo?.lat, lng: ipInfo?.lng }} />}
 		</>
 	);
 }

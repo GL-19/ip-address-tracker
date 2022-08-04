@@ -1,12 +1,31 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useRef } from "react";
+import { MapContainer, TileLayer, ZoomControl, Marker, useMap } from "react-leaflet";
 
-export function Map() {
+interface MapProps {
+	position: {
+		lat: number;
+		lng: number;
+	};
+}
+
+export function Map({ position }: MapProps) {
 	return (
-		<MapContainer center={[45.4, -75.7]} zoom={12} scrollWheelZoom={false}>
-			<TileLayer
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			/>
-		</MapContainer>
+		<>
+			{position.lat && position.lng && (
+				<MapContainer
+					center={[position.lat, position.lng]}
+					zoom={15}
+					zoomControl={false}
+					scrollWheelZoom={false}
+				>
+					<TileLayer
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					/>
+					<ZoomControl position="bottomright" />
+					<Marker position={[position.lat, position.lng]} />
+				</MapContainer>
+			)}
+		</>
 	);
 }

@@ -1,4 +1,4 @@
-export interface IIp {
+export interface IIpInfo {
 	address: string;
 	location: string;
 	timezone: string;

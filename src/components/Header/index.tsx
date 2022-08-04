@@ -1,11 +1,11 @@
-import { IIp } from "../../interfaces/IIp";
+import { IIpInfo } from "../../interfaces/IIpInfo";
 import { IpInfoCard } from "../IpInfoCard";
 import { SearchForm } from "../SearchForm";
 import { HeaderContainer, IpInfoCardContainer, Title } from "./styles";
 
 interface HeaderProps {
 	onSearch: (search: string) => Promise<void>;
-	ip?: IIp;
+	ip?: IIpInfo;
 }
 
 export function Header({ onSearch, ip }: HeaderProps) {

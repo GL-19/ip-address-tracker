@@ -1,8 +1,8 @@
-import { IIp } from "../../interfaces/IIp";
+import { IIpInfo } from "../../interfaces/IIpInfo";
 import { Identifier, InfoContainer, Information, CardContainer } from "./styles";
 
 interface IpInfoCardProps {
-	ip?: IIp;
+	ip?: IIpInfo;
 }
 
 export function IpInfoCard({ ip }: IpInfoCardProps) {
@@ -20,7 +20,7 @@ export function IpInfoCard({ ip }: IpInfoCardProps) {
 
 			<InfoContainer>
 				<Identifier>Timezone</Identifier>
-				<Information>{ip?.timezone ? ip.timezone : "UTC-05:00"}</Information>
+				<Information>{ip?.timezone ? `UTC ${ip.timezone}` : "UTC 05:00"}</Information>
 			</InfoContainer>
 
 			<InfoContainer>

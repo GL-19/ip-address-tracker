@@ -19,16 +19,15 @@ function App() {
 				isp: data.isp,
 			};
 
-			console.log(ip);
 			setIpInfo(ip);
 		} catch (error) {
 			console.log(error);
 		}
 	}, []);
 
-	useEffect(() => {
+	/* 	useEffect(() => {
 		handleIpSearch();
-	}, [handleIpSearch]);
+	}, [handleIpSearch]); */
 
 	return (
 		<>
@@ -39,29 +38,3 @@ function App() {
 }
 
 export default App;
-
-//using ipwho.is
-/* const handleIpSearch = useCallback(async (ipAddress: string) => {
-		try {
-			const { data } = await api.get(`${ipAddress}`);
-
-			if (!data.success) {
-				console.log("search failed!");
-				return;
-			}
-
-			console.log(data);
-
-			const ip: IIpInfo = {
-				address: data.ip,
-				timezone: data.timezone.utc,
-				location: `${data.country_code}-${data.region_code}-${data.city}`,
-				isp: data.connection.isp,
-			};
-
-			console.log(ip);
-			setIpInfo(ip);
-		} catch (error) {
-			console.log(error);
-		}
-	}, []); */

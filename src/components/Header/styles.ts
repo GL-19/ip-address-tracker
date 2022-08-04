@@ -5,6 +5,7 @@ export const IpInfoCardContainer = styled.div`
 	width: 100%;
 	position: relative;
 	top: 1.5rem;
+	z-index: 1;
 
 	@media screen and (min-width: 850px) {
 		top: 2.5rem;
@@ -22,9 +23,9 @@ export const HeaderContainer = styled.header`
 
 	background-image: url(${headerBackground});
 
-	@media screen and (min-width: 650px) {
+	@media screen and (min-width: 500px) {
 		height: 15rem;
-		padding: 2rem 6rem;
+		padding: 2rem 4rem;
 	}
 
 	@media screen and (min-width: 850px) {

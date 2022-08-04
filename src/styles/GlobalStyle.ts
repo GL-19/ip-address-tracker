@@ -22,4 +22,10 @@ export const GlobalStyle = createGlobalStyle`
   input, button {
     font-family: 'Rubik', sans-serif;
   }
+
+  .leaflet-container {
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+  }
 `;

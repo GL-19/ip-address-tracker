@@ -1,32 +1,61 @@
-import { FormEvent, useState } from "react";
-import { Button, Form, Input } from "./styles";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-interface SearchIpFormProps {
+import { Button, ErrorMsg, Form, Input } from "./styles";
+import { domainRegex, emailRegex, ipAddressRegex } from "../../utils/regexes";
+
+interface SearchFormProps {
 	onSubmit: (search: string) => Promise<void>;
-	placeholder?: string;
 }
 
-export function SearchForm({ onSubmit, placeholder }: SearchIpFormProps) {
-	const [search, setSearch] = useState("");
+interface SearchFormInputs {
+	search: string;
+}
 
-	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault();
-		try {
-			await onSubmit(search);
-		} catch (error) {
-			console.log("Search failed!");
-		}
+const SearchFormSchema = yup
+	.object({
+		search: yup
+			.string()
+			.test(
+				"Email or domain or ip address",
+				"Enter a valid email or domain or ip address",
+				(value) => {
+					return (
+						emailRegex.test(value as string) ||
+						domainRegex.test(value as string) ||
+						ipAddressRegex.test(value as string)
+					);
+				}
+			)
+			.required("Email or Domain or Ip Address is required"),
+	})
+	.required();
+
+export function SearchForm({ onSubmit }: SearchFormProps) {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<SearchFormInputs>({
+		resolver: yupResolver(SearchFormSchema),
+	});
+
+	async function submitHandler(data: SearchFormInputs) {
+		await onSubmit(data.search);
 	}
 
 	return (
-		<Form action="submit" onSubmit={handleSubmit}>
-			<Input
-				type="text"
-				placeholder={placeholder ? placeholder : "Search"}
-				value={search}
-				onChange={(event) => setSearch(event.target.value)}
-			/>
-			<Button type="submit">{">"}</Button>
-		</Form>
+		<>
+			<Form action="submit" onSubmit={handleSubmit(submitHandler)}>
+				<Input
+					type="text"
+					placeholder="Search for any IP address or domain or email"
+					{...register("search")}
+				/>
+				<Button type="submit">{">"}</Button>
+			</Form>
+			{errors.search && <ErrorMsg>{errors.search?.message}</ErrorMsg>}
+		</>
 	);
 }

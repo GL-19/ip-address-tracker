@@ -40,3 +40,9 @@ export const Button = styled.button`
 		filter: brightness(0.5);
 	}
 `;
+
+export const ErrorMsg = styled.h1`
+	color: white;
+	font-weight: 400;
+	font-size: 1rem;
+`;

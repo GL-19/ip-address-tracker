@@ -55,10 +55,7 @@ function App() {
 			<Header>
 				<Title>IP Address Tracker</Title>
 
-				<SearchForm
-					onSubmit={handleIpSearch}
-					placeholder="Search for any IP address or domain"
-				/>
+				<SearchForm onSubmit={handleIpSearch} />
 
 				{isError && <ErrorMsg>An error occurred while searching</ErrorMsg>}
 

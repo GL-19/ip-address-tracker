@@ -52,7 +52,7 @@ export const Information = styled.p`
 
 export const Skeleton = styled.div`
 	height: 1.25rem;
-	width: 10rem;
+	width: 7.5rem;
 	background: #eee;
 	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
 	border-radius: 5px;

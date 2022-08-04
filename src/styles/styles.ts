@@ -40,12 +40,23 @@ export const Title = styled.h1`
 	margin-bottom: 1.5rem;
 `;
 
+export const ErrorMsg = styled.h1`
+	color: white;
+	font-weight: 400;
+	font-size: 1rem;
+`;
+
 export const MapSkeleton = styled.div`
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 	background: #eee;
 	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
 	border-radius: 5px;
 	background-size: 200% 100%;
 	animation: 1.5s shine linear infinite;
+`;
+
+export const Main = styled.main`
+	width: 100%;
+	height: 100vh;
 `;

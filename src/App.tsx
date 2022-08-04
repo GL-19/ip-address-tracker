@@ -2,11 +2,19 @@ import { useCallback, useEffect, useState } from "react";
 import { IpInfoCard, Map, SearchForm } from "./components";
 import { IIpInfo } from "./interfaces/IIpInfo";
 import { getIp } from "./services/api";
-import { Header, IpInfoCardContainer, MapSkeleton, Title } from "./styles/styles";
+import {
+	ErrorMsg,
+	Header,
+	IpInfoCardContainer,
+	Main,
+	MapSkeleton,
+	Title,
+} from "./styles/styles";
 
 function App() {
 	const [ipInfo, setIpInfo] = useState<IIpInfo>({} as IIpInfo);
 	const [isLoading, setLoading] = useState(true);
+	const [isError, setError] = useState(false);
 
 	const handleIpSearch = useCallback(async (ipAddress?: string) => {
 		try {
@@ -28,7 +36,9 @@ function App() {
 			};
 
 			setIpInfo(ip);
+			setError(false);
 		} catch (error) {
+			setError(true);
 			setIpInfo({} as IIpInfo);
 			console.log(error);
 		} finally {
@@ -50,16 +60,20 @@ function App() {
 					placeholder="Search for any IP address or domain"
 				/>
 
+				{isError && <ErrorMsg>An error occurred while searching</ErrorMsg>}
+
 				<IpInfoCardContainer>
-					<IpInfoCard ip={ipInfo} isLoading={isLoading} />
+					<IpInfoCard ip={ipInfo} isLoading={isLoading || isError} />
 				</IpInfoCardContainer>
 			</Header>
 
-			{isLoading ? (
-				<MapSkeleton />
-			) : (
-				<Map position={{ lat: ipInfo?.lat, lng: ipInfo?.lng }} />
-			)}
+			<Main>
+				{isError || isLoading ? (
+					<MapSkeleton />
+				) : (
+					<Map position={{ lat: ipInfo?.lat, lng: ipInfo?.lng }} />
+				)}
+			</Main>
 		</>
 	);
 }

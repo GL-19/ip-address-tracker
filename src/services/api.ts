@@ -3,7 +3,8 @@ import { domainRegex, emailRegex, ipAddressRegex } from "../utils/regexes";
 
 // api using IP Geolocation
 export const api = axios.create({
-	baseURL: "https://geo.ipify.org/api/v2",
+	baseURL: "https://corsanywhere.herokuapp.com/https://geo.ipify.org/api/v2",
+	/* baseURL: "https://geo.ipify.org/api/v2", */
 });
 
 export const getIp = async (param?: string): Promise<AxiosResponse> => {

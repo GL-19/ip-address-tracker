@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { Header, Map } from "./components";
+import { IpInfoCard, Map, SearchForm } from "./components";
 import { IIpInfo } from "./interfaces/IIpInfo";
 import { getIp } from "./services/api";
+import { Header, IpInfoCardContainer, MapSkeleton, Title } from "./styles/styles";
 
 function App() {
 	const [ipInfo, setIpInfo] = useState<IIpInfo>({} as IIpInfo);
-	const [displayMap, setDisplayMap] = useState(false);
+	const [isLoading, setLoading] = useState(true);
 
 	const handleIpSearch = useCallback(async (ipAddress?: string) => {
 		try {
-			setDisplayMap(false);
+			setLoading(true);
+
 			const { data } = await getIp(ipAddress);
 
 			console.log(data);
@@ -27,7 +29,10 @@ function App() {
 
 			setIpInfo(ip);
 		} catch (error) {
+			setIpInfo({} as IIpInfo);
 			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	}, []);
 
@@ -35,14 +40,26 @@ function App() {
 		handleIpSearch();
 	}, [handleIpSearch]);
 
-	useEffect(() => {
-		setDisplayMap(true);
-	}, [ipInfo]);
-
 	return (
 		<>
-			<Header onSearch={handleIpSearch} ip={ipInfo} />
-			{displayMap && <Map position={{ lat: ipInfo?.lat, lng: ipInfo?.lng }} />}
+			<Header>
+				<Title>IP Address Tracker</Title>
+
+				<SearchForm
+					onSubmit={handleIpSearch}
+					placeholder="Search for any IP address or domain"
+				/>
+
+				<IpInfoCardContainer>
+					<IpInfoCard ip={ipInfo} isLoading={isLoading} />
+				</IpInfoCardContainer>
+			</Header>
+
+			{isLoading ? (
+				<MapSkeleton />
+			) : (
+				<Map position={{ lat: ipInfo?.lat, lng: ipInfo?.lng }} />
+			)}
 		</>
 	);
 }

@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { MapContainer, TileLayer, ZoomControl, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, Marker } from "react-leaflet";
 
 interface MapProps {
 	position: {

@@ -1,35 +1,42 @@
 import { IIpInfo } from "../../interfaces/IIpInfo";
-import { Identifier, InfoContainer, Information, CardContainer } from "./styles";
+import {
+	Identifier,
+	InfoContainer,
+	Information,
+	CardContainer,
+	Skeleton,
+} from "./styles";
 
 interface IpInfoCardProps {
 	ip?: IIpInfo;
+	isLoading: boolean;
 }
 
-export function IpInfoCard({ ip }: IpInfoCardProps) {
+export function IpInfoCard({ ip, isLoading = false }: IpInfoCardProps) {
 	return (
 		<CardContainer>
 			<InfoContainer>
 				<Identifier>Ip Address</Identifier>
-				<Information>{ip?.address ? ip.address : "192.212.174.101"}</Information>
+				{isLoading ? <Skeleton /> : <Information>{ip?.address}</Information>}
 			</InfoContainer>
 
 			<InfoContainer>
 				<Identifier>Location</Identifier>
-				<Information>
-					{ip?.country && ip?.region && ip?.city
-						? `${ip.city}-${ip.region}-${ip.country}`
-						: "Brooklyn, NY 10001"}
-				</Information>
+				{isLoading ? (
+					<Skeleton />
+				) : (
+					<Information>{`${ip?.city}-${ip?.region}-${ip?.country}`}</Information>
+				)}
 			</InfoContainer>
 
 			<InfoContainer>
 				<Identifier>Timezone</Identifier>
-				<Information>{ip?.timezone ? `UTC ${ip.timezone}` : "UTC 05:00"}</Information>
+				{isLoading ? <Skeleton /> : <Information>{`UTC ${ip?.timezone}`}</Information>}
 			</InfoContainer>
 
 			<InfoContainer>
 				<Identifier>Isp</Identifier>
-				<Information>{ip?.isp ? ip.isp : "SpaceX - Starlink"}</Information>
+				{isLoading ? <Skeleton /> : <Information>{ip?.isp}</Information>}
 			</InfoContainer>
 		</CardContainer>
 	);

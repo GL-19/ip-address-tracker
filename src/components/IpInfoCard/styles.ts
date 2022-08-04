@@ -49,3 +49,13 @@ export const Information = styled.p`
 	font-weight: 500;
 	color: var(--very-dark-gray);
 `;
+
+export const Skeleton = styled.div`
+	height: 1.25rem;
+	width: 10rem;
+	background: #eee;
+	background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+	border-radius: 5px;
+	background-size: 200% 100%;
+	animation: 1.5s shine linear infinite;
+`;

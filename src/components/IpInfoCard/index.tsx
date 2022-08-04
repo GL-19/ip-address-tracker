@@ -15,7 +15,11 @@ export function IpInfoCard({ ip }: IpInfoCardProps) {
 
 			<InfoContainer>
 				<Identifier>Location</Identifier>
-				<Information>{ip?.location ? ip.location : "Brooklyn, NY 10001"}</Information>
+				<Information>
+					{ip?.country && ip?.region && ip?.city
+						? `${ip.city}-${ip.region}-${ip.country}`
+						: "Brooklyn, NY 10001"}
+				</Information>
 			</InfoContainer>
 
 			<InfoContainer>

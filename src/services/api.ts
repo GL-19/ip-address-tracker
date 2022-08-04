@@ -13,7 +13,7 @@ export const getIp = async (param?: string): Promise<AxiosResponse> => {
 		/^((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}\.(xn--)?([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,})$/;
 
 	if (param?.match(emailRegex)) {
-		return api.get(`country`, {
+		return api.get(`country,city`, {
 			params: {
 				apiKey: process.env.REACT_APP_IP_GEOLOCATION_API_KEY,
 				email: param,
@@ -22,7 +22,7 @@ export const getIp = async (param?: string): Promise<AxiosResponse> => {
 	}
 
 	if (param?.match(domainRegex)) {
-		return api.get(`country`, {
+		return api.get(`country,city`, {
 			params: {
 				apiKey: process.env.REACT_APP_IP_GEOLOCATION_API_KEY,
 				domain: param,
@@ -31,7 +31,7 @@ export const getIp = async (param?: string): Promise<AxiosResponse> => {
 	}
 
 	if (param?.match(ipAddressRegex)) {
-		return api.get(`country`, {
+		return api.get(`country,city`, {
 			params: {
 				apiKey: process.env.REACT_APP_IP_GEOLOCATION_API_KEY,
 				ipAddress: param,
@@ -39,7 +39,7 @@ export const getIp = async (param?: string): Promise<AxiosResponse> => {
 		});
 	}
 
-	return api.get(`country`, {
+	return api.get(`country,city`, {
 		params: {
 			apiKey: process.env.REACT_APP_IP_GEOLOCATION_API_KEY,
 		},

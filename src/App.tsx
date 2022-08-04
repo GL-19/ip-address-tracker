@@ -14,9 +14,13 @@ function App() {
 
 			const ip: IIpInfo = {
 				address: data.ip,
-				timezone: data.location.timezone,
-				location: `${data.location.country}-${data.location.region}`,
 				isp: data.isp,
+				timezone: data.location.timezone,
+				country: data.location.country,
+				region: data.location.region,
+				city: data.location.city,
+				lat: data.location.lat,
+				lng: data.location.lng,
 			};
 
 			setIpInfo(ip);

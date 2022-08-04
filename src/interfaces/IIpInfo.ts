@@ -1,6 +1,10 @@
 export interface IIpInfo {
 	address: string;
-	location: string;
+	country: string;
+	region: string;
+	city: string;
 	timezone: string;
 	isp: string;
+	lat: number;
+	lng: number;
 }
